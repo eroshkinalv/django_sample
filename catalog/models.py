@@ -8,6 +8,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
+        ordering = ['name']
+
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
@@ -25,4 +30,3 @@ class Product(models.Model):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
         ordering = ['name']
-        # db_table = 'custom_table_name'
