@@ -30,3 +30,18 @@ class Product(models.Model):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
         ordering = ['name']
+
+
+class Contact(models.Model):
+    p_name = models.CharField(max_length=150)
+    phone = models.IntegerField()
+    message = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.p_name} ({self.phone}): {self.message} / {self.created_at}'
+
+    class Meta:
+        verbose_name = 'обратная связь'
+        verbose_name_plural = 'обратная связь'
+        ordering = ['created_at']

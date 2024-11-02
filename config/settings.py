@@ -7,7 +7,7 @@ load_dotenv(override=True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-#w_ko8y=*dapfj@4xlktv3qj$nz6%ax&(whq+^jh3u_zj2=v)_"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "catalog",
+    "blog",
 ]
 
 MIDDLEWARE = [
