@@ -7,7 +7,7 @@ load_dotenv(override=True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-#w_ko8y=*dapfj@4xlktv3qj$nz6%ax&(whq+^jh3u_zj2=v)_"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
@@ -20,8 +20,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'bootstrap4',
 
     "catalog",
+    "blog",
 ]
 
 MIDDLEWARE = [
@@ -95,3 +97,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  #тестовый режим
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
