@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 
 {% block title %}Skystore{% endblock %}
 
 {% block content %}
 
-{% include 'header.html' %}
+{% include 'catalog/header.html' %}
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Skystore</h1>
@@ -25,7 +25,7 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>{{ product.description|truncatechars:100 }}</li>
                     </ul>
-                    <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="/products_view/{{product.id}}/">Купить</a>
+                    <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.pk%}">Купить</a>
                 </div>
             </div>
         </div>

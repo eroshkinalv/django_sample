@@ -15,13 +15,15 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField(null=True, blank=True)
+    name = models.CharField(max_length=150, verbose_name='Название товара')
+    description = models.TextField(null=True, blank=True, verbose_name='Описание товара')
     image = models.ImageField(upload_to='photos/', verbose_name='Изображение')
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='categories')
-    price = models.IntegerField(help_text='Цена за покупку')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='categories', verbose_name='Категория товара')
+    price = models.IntegerField(help_text='(укажите цену)', verbose_name='Цена')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    checkbox = models.BooleanField(verbose_name="Согласен с условиями использования сайта", default=False)
 
     def __str__(self):
         return self.name
