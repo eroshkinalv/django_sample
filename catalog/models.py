@@ -23,7 +23,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    check_box = models.BooleanField(verbose_name="Опубликовано", default=True)
+    checkbox = models.BooleanField(verbose_name="Согласен с условиями использования сайта", default=False)
 
     def __str__(self):
         return self.name

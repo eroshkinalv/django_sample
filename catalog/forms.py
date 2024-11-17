@@ -37,6 +37,10 @@ class ProductForm(ModelForm):
             'class': 'form-control',
         })
 
+        self.fields['checkbox'].widget.attrs.update({
+            'class': 'form-label',
+        })
+
     def clean(self):
         cleaned_data = super().clean()
         return cleaned_data
@@ -66,3 +70,11 @@ class ProductForm(ModelForm):
         if float(price) < 0:
             raise ValidationError('Цена не может быть отрицательной.')
         return price
+
+    def clean_checkbox(self):
+
+        checkbox = self.cleaned_data.get('checkbox')
+
+        if checkbox == False:
+            raise ValidationError('Это обязательное поле для заполнения')
+        return checkbox
