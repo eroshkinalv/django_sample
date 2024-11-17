@@ -78,3 +78,18 @@ class ProductForm(ModelForm):
         if checkbox == False:
             raise ValidationError('Это обязательное поле для заполнения')
         return checkbox
+
+    def clean_image(self):
+
+        image = self.cleaned_data.get('image')
+        image_size = image.size
+        image_name = image.name
+        max_size = 5 * 1024 * 1024
+
+        if image_size > max_size:
+            raise ValidationError('Размер файла не должен превышать 5МБ')
+
+        elif not (image_name.endswith('png') or image_name.endswith('jpg')):
+            raise ValidationError('Формат файла должен быть PNG или JPEG')
+
+        return image
