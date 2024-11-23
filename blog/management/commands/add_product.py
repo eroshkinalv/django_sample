@@ -23,4 +23,4 @@ class Command(BaseCommand):
                     self.style.SUCCESS(f'Successfully added product: {blog.heading}'))
             else:
                 self.stdout.write(
-                    self.style.WARNING(f'Student already exists: {blog.heading}'))
+                    self.style.WARNING(f'Blog already exists: {blog.heading}'))

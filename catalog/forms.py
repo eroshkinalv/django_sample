@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, BooleanField
 from django.core.exceptions import ValidationError
 from catalog.models import Product
 
@@ -93,3 +93,12 @@ class ProductForm(ModelForm):
             raise ValidationError('Формат файла должен быть PNG или JPEG')
 
         return image
+
+
+class StyleFormsMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field, BooleanField):
+                field.widget.attrs['class'] = 'form-label'
+            field.widget.attrs['class'] = 'form-control'
