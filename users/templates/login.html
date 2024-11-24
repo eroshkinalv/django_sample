@@ -1,7 +1,5 @@
 {% extends 'catalog/base.html' %}
 
-{% load bootstrap4 %}
-
 {% block title %}Skystore{% endblock %}
 
 {% block content %}
@@ -21,8 +19,13 @@
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data" class="form-floating">
-                        {% csrf_token %}
-                        {% bootstrap_form form %}
+                        <div class="mb-3">
+                          {% csrf_token %}
+                          <label for="exampleFormControlInput1" class="form-label">Email:</label>
+                          <input type="email" class="form-control" id="exampleFormControlInput1" name="username" placeholder="name@example.com">
+                          <label for="inputPassword5" class="form-label">Пароль:</label>
+                          <input type="password" id="inputPassword5" class="form-control" name="password" aria-describedby="passwordHelpBlock" placeholder="Введите пароль">
+                        </div>
                         <button type="submit" class="btn btn-lg btn-block btn-outline-primary mt-3">
                             Войти
                         </button>
