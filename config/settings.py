@@ -20,10 +20,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'bootstrap4',
+    "bootstrap4",
+    "phonenumber_field",
 
     "catalog",
     "blog",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -107,3 +109,13 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
+
+AUTH_USER_MODEL = 'users.User'
+
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/home/'
+LOGIN_URL = '/users/login/'
