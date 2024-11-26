@@ -6,7 +6,7 @@ import phonenumbers
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Email')
-    phone = phonenumbers.PhoneNumber(country_code=7)
+    phone = models.CharField(max_length=120, null=True, blank=True, verbose_name='Телефон')
     image = models.ImageField(upload_to='profile_img/', null=True, blank=True, verbose_name='Аватар')
     country = models.CharField(max_length=120, null=True, blank=True, verbose_name='Страна')
 

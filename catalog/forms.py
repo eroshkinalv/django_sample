@@ -8,7 +8,7 @@ BANNED_WORDS = ['казино', 'криптовалюта', 'крипта', 'б�
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        exclude = ('created_at', 'updated_at',)
+        exclude = ('created_at', 'updated_at', 'owner')
 
     def __init__(self, *args, **kwargs):
 
@@ -93,6 +93,13 @@ class ProductForm(ModelForm):
             raise ValidationError('Формат файла должен быть PNG или JPEG')
 
         return image
+
+
+class ProductModeratorForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ('checkbox',)
+        # exclude = ('owner',)
 
 
 class StyleFormsMixin:
