@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
@@ -23,7 +25,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    checkbox = models.BooleanField(verbose_name="Согласен с условиями использования сайта", default=False)
+    checkbox = models.BooleanField(verbose_name="Опубликовать продукт в каталоге", default=False)
+
+    owner = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -32,6 +36,9 @@ class Product(models.Model):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
         ordering = ['name']
+        permissions = [
+            ('can_unpublish_products', 'Can unpublish product'),
+        ]
 
 
 class Contact(models.Model):
