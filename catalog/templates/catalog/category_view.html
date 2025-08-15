@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Skystore{% endblock %}
+
+{% block content %}
+
+{% include 'catalog/header.html' %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">{{ category.name }}</h1>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h5 class="card-title pricing-card-title">{{ category.description }}</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group mt-3 mb-4 text-start m-3">
+                        {% for product in products %}
+                      <li class="list-group-item">
+                      <p><a class="link-opacity-100" href="{% url 'catalog:product_detail' product.pk%}">{{ product.name }}</a></p></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

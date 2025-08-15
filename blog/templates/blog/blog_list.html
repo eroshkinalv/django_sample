@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Skystory{% endblock %}
+
+{% block content %}
+
+{% include 'catalog/header.html' %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Skystory</h1>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col">
+            {% for blog in object_list %}
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <img src="{{ blog.image.url }}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title pricing-card-title">{{ blog.heading }}</h5>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    </ul>
+                    <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_detail' blog.pk %}" >Подробнее</a>
+                </div>
+            </div>
+            {% endfor %}
+            <ul class="list-unstyled text-small">
+                <li><a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_create' %}" >Добавить новую запись</a></li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
