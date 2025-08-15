@@ -1,9 +1,15 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from dotenv import load_dotenv
+
 from .models import Blog
+import os
 
 from django.core.mail import send_mail
+
+
+load_dotenv(override=True)
 
 
 class BlogCreateView(CreateView):
@@ -31,8 +37,8 @@ class BlogDetailView(DetailView):
             send_mail(
                 "Поздравляем!",
                 f"Поздравляем! У вашей записи '{self.object.heading}' 100 просмотров!",
-                "eroshkina.liudmila.email@gmail.com",
-                ["liudotchka@gmail.com"],
+                os.getenv("EMAIL_HOST_USER"),
+                [os.getenv("EMAIL_HOST_USER")],
                 fail_silently=False,
             )
         return self.object

@@ -7,7 +7,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from .forms import ProductForm, ProductModeratorForm
-from .models import Product, Contact
+from .models import Product, Contact, Category
+from .services import get_products_from_cache, sort_products_by_category
 
 
 class ProductListView(ListView):
@@ -16,7 +17,7 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = get_products_from_cache()
         return queryset.filter(checkbox=True)
 
 
@@ -79,3 +80,18 @@ class ContactTemplateView(TemplateView):
             contact.save()
             return HttpResponse('Спасибо за обращение.')
         return render(request, 'contacts.html')
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'catalog/category_list.html'
+    context_object_name = 'categories'
+
+
+class CategoryDetailView(LoginRequiredMixin, DetailView):
+    model = Category
+    template_name = 'catalog/category_view.html'
+    context_object_name = 'category'
+
+    def get_context_data(self, **kwargs):
+        return sort_products_by_category(self.object.id)

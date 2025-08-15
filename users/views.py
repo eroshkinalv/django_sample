@@ -31,7 +31,7 @@ class UserCreateView(CreateView):
             "Подтверждение адреса электронной почты",
             f"Подтвердите регистацию на сайте Skystore. Перейдите по ссылке: {url} .",
             os.getenv("EMAIL_HOST_USER"),
-            ["liudotchka@gmail.com"],
+            [f"{user.email}"],
             fail_silently=False,
         )
 
